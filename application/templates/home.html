@@ -1,6 +1,6 @@
 <html>
 
-    <h2> Customer System </h2> 
+    <h2> Customer information System </h2> 
 
     <br>
     <a href="{{ url_for('saverecord') }}"> New Record </a>
@@ -22,7 +22,8 @@
     <br>
 
     <table>
-        <tr bgcolor='Green'>
+
+        <tr>
             
             <td > first_name </td>
             <td > last_name </td>
@@ -34,7 +35,7 @@
 
         {%  for record in records %}
             <tr>
-                <td> <a href="{{ url_for('personalInformation', cust_id = record.cust_id) }}"> {{ 'record.name' }}</a> view </td>
+                <td> <a href="{{ url_for('personalInformation', cust_id = record.cust_id) }}"> {{ 'record.name' }} </a> view </td>
                 <td> <a href="{{ url_for('editrecord', cust_id = record.cust_id) }}"> edit </a>, 
                     <a href="{{ url_for('deleterecord', cust_id = record.cust_id) }}"> delete </a>
                 </td>
