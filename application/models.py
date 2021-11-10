@@ -15,8 +15,9 @@ class order(db.model):
     quantity= db.column(db.integer)
     price= db.column(db.float)
     customer_id= db.column(db.integer, db.foreign_key('customer.customer_id'))
-    def __repr__(self):
-        return f"{self.quantity} {self.item} {self.price} {self.customer_id}"
+    
+    # def __repr__(self):
+    #     return f"{self.quantity} {self.item} {self.price} {self.customer_id}"
     
 # class Customer(db.Model):
 #     cust_id= db.Column(db.Integer, primary_key= True)

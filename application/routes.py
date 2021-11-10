@@ -1,21 +1,39 @@
 from flask import request, redirect, render_template
 from application import app, db
-from application.forms import AddEmp, UpdateEmp #update imports
-from application.models import Employee #update imports
+from application.forms import add_cust, update_cust #update imports
+from application.models import customer, order #update imports
+
 
 #update home route eith database info
 @app.route('/')
 def home():
-    emps = Employee.query.all()
-    return render_template('Home.html', records=emps)
+    cust = customer.query.all()
+    return render_template('Home.html', records=cust)
+
 
 #update editrecord with database info
-@app.route("/editRecord/<int:empno>", methods=['GET', 'POST'])
-def editRecordForm(empno):
-    form = UpdateEmp()
-    emp = Employee.query.filter_by(empno=empno).first()
+@app.route("/editrecord/<int:cust_id>", methods=['GET', 'POST'])
+def editrecordform(cust_id):
+    form = update_cust()
+    cust = customer.query.filter_by(cust_id=cust_id).first()
+
     if request.method == 'POST':
-        pass
+        cust.name = form.cust_first_name.data
+        cust.salary = form.cust_last_name.data
+        cust.dept = form.address.data
+        cust.subject = form.phone_no.data
+        cust.marks = form.e_mail.data
+
+        cust.first_name= form.customer_id.data
+
+        db.session.commit()
+        return redirect("/")
+    return render_template('editform.html', form=form)
+
+
+
+
+
 
 #update filterrecords with database info
 @app.route("/filterrecords",methods=["POST"])
@@ -26,10 +44,14 @@ def filterrecords():
         data = Employee.query.filter_by(dept=request.form["dept"]).all()
         return render_template("home.html",records=data)
 
+
+
+
+
 #update saved records with database info
-@app.route("/saveRecord",methods=["GET","POST"])
-def saveRecord():
-    form = AddEmp()
+@app.route("/saverecord",methods=["GET","POST"])
+def saverecord():
+    form = add_cust()
     if request.method == 'POST':
         pass 
         #add -'name' =form.name.data
@@ -39,6 +61,9 @@ def saveRecord():
         db.session.commit()
         return redirect("/")
         return render_template("inputform.html", form=form)
+
+
+
 
 
 #update with database info

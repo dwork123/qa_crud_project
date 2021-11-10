@@ -1,18 +1,19 @@
 
-{% comment %} import database values into form sheet {% endcomment %}
 <html>
 <div class='form'>
 	<form action="" method="POST">
 		{{ form.hidden_tag() }}
-		{{ form.emp_name.label }} {{ form.emp_name }}
+		{{ form.cust_id.label }} {{ form.cust_id }}
 		<br>
-		{{ form.salary.label }} {{ form.salary }}
+		{{ form.first_name.label }} {{ form.first_name }}
 		<br>
-		{{ form.marks.label }} {{ form.marks }}
+		{{ form.last_name.label }} {{ form.last_name }}
 		<br>
-		{{ form.subject.label }} {{form.subject }}
+		{{ form.address.label }} {{form.address }}
 		<br>
-		{{ form.department.label }} {{ form.department }}
+		{{ form.phone_no.label }} {{ form.phone_no }}
+		<br>
+		{{ form.e_mail.label }} {{ form.e_mail }}
 		<br>
 		{{ form.submit }}
 	</form>

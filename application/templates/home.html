@@ -1,30 +1,42 @@
 <html>
-    <center> <h2> Employee Information System </h2>
+
+    <h2> Customer System </h2> 
+
     <br>
+    <a href="{{ url_for('saverecord') }}"> New Record </a>
     <br>
-    <br>
-    <a href="{{ url_for('saveRecord') }}"> New Record </a>
-    <br>
+
     <form action="{{ url_for('filterrecords') }}" method="POST">
-    {% comment %} add form information {% endcomment %}
+    {% comment %} add filterrecords options information {% endcomment %}
+        <select>
+            <option value="#">##</option>
+            <option value="#">##</option>
+            <option value="#">##</option>
+            <option value="#">##</option>
+            <option value="#">##</option>
+        </select>
+        <input type="submit" value="filter">
 
+    </form>
 
+    <br>
 
     <table>
         <tr bgcolor='Green'>
             
-            <td > Name </td>
-            <td > Department </td>
-            <td > Subject</td>
-            <td> Operations </td>
+            <td > first_name </td>
+            <td > last_name </td>
+            <td > address</td>
+            <td> phone_no </td>
+            <td> e_mail  </td>
 
         </tr>
 
         {%  for record in records %}
             <tr>
-                <td> <a href="{{ url_for('personalInformation', empno = record.empno) }}"> {{ record.name }}</a> </td>
-                <td> <a href="{{ url_for('editRecordForm', empno = record.empno) }}"> edit </a>, 
-                    <a href="{{ url_for('deleteEmployee', empno = record.empno) }}"> delete </a>
+                <td> <a href="{{ url_for('personalInformation', cust_id = record.cust_id) }}"> {{ 'record.name' }}</a> view </td>
+                <td> <a href="{{ url_for('editrecord', cust_id = record.cust_id) }}"> edit </a>, 
+                    <a href="{{ url_for('deleterecord', cust_id = record.cust_id) }}"> delete </a>
                 </td>
             </tr>
         {% endfor %}
