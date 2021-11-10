@@ -28,7 +28,7 @@ def editrecordform(cust_id):
         return redirect("/")
     return render_template('editform.html', form=form)
 
-# update order
+
 @app.route("/editrecord/<int:order_id>", methods=['GET', 'POST'])
 
 def editrecordform(customer_id):
@@ -45,10 +45,7 @@ def editrecordform(customer_id):
     return render_template('editorderform.html', form=form)
 
 
-
-
-
-
+# update filter
 @app.route("/filterrecords",methods=["POST"])
 def filterrecords():
     if request.form["cust_id"]=="all":
@@ -56,7 +53,7 @@ def filterrecords():
     else:
         data = customer.query.filter_by(dept=request.form["cust"]).all()
         return render_template("Home.html",records=data)
-
+# -----------------------------------------------------------------
 
 #update saved records with database info
 @app.route("/saverecord",methods=["GET","POST"])
@@ -64,8 +61,8 @@ def saverecord():
     form = add_cust()
     if request.method == 'POST':
 
-        cust.name = form.cust_first_name.data
-        cust.last_name = form.cust_last_name.data
+        cust.name = form.first_name.data
+        cust.last_name = form.last_name.data
         cust.address = form.address.data
         cust.phone_no = form.phone_no.data
         cust.e_mail = form.e_mail.data
@@ -74,7 +71,7 @@ def saverecord():
         db.session.add(new_cust)
         db.session.commit()
         return redirect("/")
-        return render_template("inputform.html", form=form)
+        return render_template("costumerinputform.html", form=form)
 
 
 @app.route("/saverecord",methods=["GET","POST"])
