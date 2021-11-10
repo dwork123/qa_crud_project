@@ -1,0 +1,32 @@
+<html>
+    <center> <h2> Employee Information System </h2>
+    <br>
+    <br>
+    <br>
+    <a href="{{ url_for('saveRecord') }}"> New Record </a>
+    <br>
+    <form action="{{ url_for('filterrecords') }}" method="POST">
+    {% comment %} add form information {% endcomment %}
+
+
+
+    <table>
+        <tr bgcolor='Green'>
+            
+            <td > Name </td>
+            <td > Department </td>
+            <td > Subject</td>
+            <td> Operations </td>
+
+        </tr>
+
+        {%  for record in records %}
+            <tr>
+                <td> <a href="{{ url_for('personalInformation', empno = record.empno) }}"> {{ record.name }}</a> </td>
+                <td> <a href="{{ url_for('editRecordForm', empno = record.empno) }}"> edit </a>, 
+                    <a href="{{ url_for('deleteEmployee', empno = record.empno) }}"> delete </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</html>

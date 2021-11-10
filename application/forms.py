@@ -3,13 +3,15 @@ from wtforms import IntegerField, StringField, SelectField, SubmitField
 
 
 
-class add_player(FlaskForm):
+class add_customer(FlaskForm):
+    pass
     submit = SubmitField('Add Player')
     pass
 
     
     
-class update_player(FlaskForm):
+class update_customer(FlaskForm):
+    pass
     submit = SubmitField('Update Player')
     pass
 
