@@ -53,12 +53,12 @@ def filterrecords():
     else:
         data = customer.query.filter_by(dept=request.form["cust"]).all()
         return render_template("Home.html",records=data)
-# -----------------------------------------------------------------
 
-#update saved records with database info
-@app.route("/saverecord",methods=["GET","POST"])
-def saverecord():
-    form = add_cust()
+
+
+@app.route("/savecustomerrecord",methods=["GET","POST"])
+def savecustomerrecord():
+    form = add_customer()
     if request.method == 'POST':
 
         cust.name = form.first_name.data
@@ -67,17 +67,27 @@ def saverecord():
         cust.phone_no = form.phone_no.data
         cust.e_mail = form.e_mail.data
 
-        new_cust = customer(first_name=first_name, last_name=last_name, address=address, phone_no=phone_no, e_mail=e_mail)
-        db.session.add(new_cust)
+        new_customer = customer(first_name=first_name, last_name=last_name, address=address, phone_no=phone_no, e_mail=e_mail)
+        db.session.add(new_customer)
         db.session.commit()
         return redirect("/")
         return render_template("costumerinputform.html", form=form)
 
 
-@app.route("/saverecord",methods=["GET","POST"])
-def saverecord():
+@app.route("/saveorderrecord",methods=["GET","POST"])
+def saveorderrecord():
     form = add_order()
     if request.method == 'POST':
+
+        order.item = form.item.data
+        order.quantity = form.quantity.data
+        order.price = form.price.data
+
+        new_order = order(item=item, quantity=quantity, price=price)
+        db.session.add(new_order)
+        db.session.commit()
+        return redirect("/")
+        return render_template("orderinputform.html", form=form)
 
 
 
@@ -86,13 +96,13 @@ def personalinformation(customer_id):
 	data = customer.query.filter_by(customer_id=customer_id).first()
 	return render_template("customerinfo.html", record=data)
 
-@app.route("/personaldetails/<int:order_id>")
+@app.route("/orderdetails/<int:order_id>")
 def personalinformation(order_id):
-	data = order.query.filter_by(order_id=orderr_id).first()
+	data = order.query.filter_by(order_id=order_id).first()
 	return render_template("orderinfo.html", record=data)
 
 
-#delete functions
+
 @app.route("/deletecustomer/<int:customer_id>")
 def deletecustomer(customer_id):
     cust = cust.query.filter_by(customer_id=custumer_id).first()
