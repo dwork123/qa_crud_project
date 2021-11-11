@@ -19,24 +19,24 @@ fi
 
 echo 'TESTING:'
 python3 -m pytest --cov=application --cov-report html
-#python3 app.py
-cat - > /tmp/app.service << EOF
-[Unit]
-Description=Run flask app as systemd
+python3 app.py
+# cat - > /tmp/app.service << EOF
+# [Unit]
+# Description=Run flask app as systemd
 
-[Service]
-User=jenkins
-Environment=db_uri=$db_uri
-Environment=secretkey=$secretkey
-Environment=GUNICORN_CMD_ARGS='--workers=4 --bind=0.0.0.0:5000'
-ExecStart=/bin/sh -c "cd /home/jenkins/.jenkins/workspace/qa_crud_project && gunicorn3 app:app"
+# [Service]
+# User=jenkins
+# Environment=db_uri=$db_uri
+# Environment=secretkey=$secretkey
+# Environment=GUNICORN_CMD_ARGS='--workers=4 --bind=0.0.0.0:5000'
+# ExecStart=/bin/sh -c "cd /home/jenkins/.jenkins/workspace/qa_crud_project && gunicorn3 app:app"
 
-[Install]
-WantedBy=multi-user.target
-EOF
+# [Install]
+# WantedBy=multi-user.target
+# EOF
 
-sudo cp /tmp/app.service /etc/systemd/system/app.service
-sudo systemctl daemon-reload
-sudo systemctl start app
+# sudo cp /tmp/app.service /etc/systemd/system/app.service
+# sudo systemctl daemon-reload
+# sudo systemctl start app
 
-sudo systemctl status app
+# sudo systemctl status app
