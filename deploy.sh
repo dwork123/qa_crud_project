@@ -38,3 +38,5 @@ EOF
 sudo cp /tmp/app.service /etc/systemd/system/app.service
 sudo systemctl daemon-reload
 sudo systemctl start app
+
+sudo systemctl status app
