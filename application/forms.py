@@ -7,13 +7,13 @@ class add_cust(FlaskForm):
     address= StringField('address')
     phone_no= IntegerField('phone_no')
     e_mail= StringField('e_mail')
-    submit = SubmitField('Add Customer')
+    submit = SubmitField('add Customer')
 
 class add_order(FlaskForm):
     item= StringField('item')
-    quantity= IntgerField('quantity')
+    quantity= IntegerField('quantity')
     price= IntegerField('price')
-    submit = SubmitField('addd order')
+    submit = SubmitField('add order')
 
 class update_cust(FlaskForm):
     first_name= StringField('first_name')
@@ -25,6 +25,6 @@ class update_cust(FlaskForm):
 
 class update_order(FlaskForm):
     item= StringField('item')
-    quantity= IntgerField('quantity')
+    quantity= IntegerField('quantity')
     price= IntegerField('price')
     submit = SubmitField('Update Order')
