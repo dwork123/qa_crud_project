@@ -7,8 +7,8 @@ from application.models import customer, order
 @app.route('/')
 def home():
     cust= customer.query.all()
-    order= order.query.all()
-    return render_template('Home.html', records=cust)
+    ord= order.query.all()
+    return render_template('home.html', records=cust)
 
     
 @app.route("/editcutomerrecord/<int:cust_id>", methods=['GET', 'POST'])
@@ -32,26 +32,25 @@ def editcustomerrecord(cust_id):
 
 def editorderrecord(order_id):
     form = update_order
-    order = order.query.filter_by(order_id=order_id).first()
+    ord = order.query.filter_by(order_id=order_id).first()
 
     if request.method == 'POST':
-        cust.name = form.item.data
-        cust.last_name = form.quantity.data
-        cust.address = form.price.data
+        ord.name = form.item.data
+        ord.last_name = form.quantity.data
+        ord.price = form.price.data
 
     db.session.commit()
     return redirect("/")
     return render_template('editorderform.html', form=form)
 
 
-# update filter
-# @app.route("/filterrecords",methods=["POST"])
-# def filterrecords():
-#     if request.form["cust_id"]=="all":
-#         return redirect("/")
-#     else:
-#         data = customer.query.filter_by(dept=request.form["cust"]).all()
-#         return render_template("Home.html",records=data)
+@app.route("/filterrecords",methods=["POST"])
+def filterrecords():
+    if request.form["cust_id"]=="all":
+        return redirect("/")
+    else:
+        data = customer.query.filter_by(dept=request.form["cust"]).all()
+        return render_template("home.html",records=data)
 
 
 
