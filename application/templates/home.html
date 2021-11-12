@@ -3,8 +3,9 @@
     <h2> Customer information System </h2> 
 
     <br>
-    <a href="{{ url_for('savecustomerrecord') }}"> New customer Record </a>
-    <a href="{{ url_for('saveorderrecord') }}"> New order Record </a>
+    <a href="{{ url_for('savecustomerrecord') }}"> New customer</a>
+    <br>
+    <a href="{{ url_for('saveorderrecord') }}"> New order</a>
     <br>
 
     <form action="{{ url_for('filterrecords') }}" method="POST">
@@ -26,19 +27,21 @@
         <tr>
             
             <td > first_name </td>
+            <br>
             <td > last_name </td>
+            <br>
             <td > address</td>
+            <br>
             <td> phone_no </td>
+            <br>
             <td> e_mail  </td>
 
         </tr>
 
         {%  for record in records %}
             <tr>
-                <td> <a href="{{ url_for('customerinfo', customer_id = record.customer_id) }}"> {{ 'record.first_name' }} {{ 'record.last_name'}} </a> view customer </td>
-                <td> <a href="{{ url_for('editrecord', customer_id = record.customer_id) }}"> edit customer </a>, 
-                    <a href="{{ url_for('deletecustomer', customer_id = record.customer_id) }}"> delete customer</a>
-                </td>
+                <td> <a href="/customerdetails/{{record.customer_id}}"> {{record.first_name }} {{record.last_name}} </a> </td>
+
             </tr>
         {% endfor %}
 
@@ -56,10 +59,6 @@
 
         {%  for record in records %}
             <tr>
-                <td> <a href="{{ url_for('orderinfo', order_id = record.order_id) }}"> {{ 'record.item' }} </a> view order </td>
-                <td> <a href="{{ url_for('editrecord', order_id = record.order_id) }}"> edit order</a>, 
-                    <a href="{{ url_for('deleterorder', order_id = record.order_id) }}"> delete order </a>
-                </td>
             </tr>
         {% endfor %}
     </table>

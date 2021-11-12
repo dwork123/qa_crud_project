@@ -2,11 +2,12 @@ from flask_wtf import FlaskForm
 from wtforms import IntegerField, StringField, SelectField, SubmitField
 
 class add_cust(FlaskForm):
+    cust_id= IntegerField('cust_id')
     first_name= StringField('first_name')
     last_name= StringField('last_name')
     address= StringField('address')
     phone_no= IntegerField('phone_no')
-    e_mail= StringField('e_mail')
+    email_address= StringField('email_address')
     submit = SubmitField('add Customer')
 
 class add_order(FlaskForm):
