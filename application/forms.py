@@ -5,7 +5,7 @@ class add_cust(FlaskForm):
     first_name= StringField('first_name')
     last_name= StringField('last_name')
     address= StringField('address')
-    phone_no= StringField('phone_no')
+    phone_no= IntegerField('phone_no')
     e_mail= StringField('e_mail')
     submit = SubmitField('Add Customer')
 

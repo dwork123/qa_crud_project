@@ -11,9 +11,9 @@ def home():
     return render_template('Home.html', records=cust)
 
     
-@app.route("/editrecord/<int:cust_id>", methods=['GET', 'POST'])
+@app.route("/editcutomerrecord/<int:cust_id>", methods=['GET', 'POST'])
 
-def editrecordform(cust_id):
+def editcustomerrecord(cust_id):
     form = update_cust
     cust = customer.query.filter_by(cust_id=cust_id).first()
 
@@ -26,12 +26,12 @@ def editrecordform(cust_id):
 
         db.session.commit()
         return redirect("/")
-    return render_template('editform.html', form=form)
+    return render_template('editcustomerform.html', form=form)
 
 
-@app.route("/editrecord/<int:order_id>", methods=['GET', 'POST'])
+@app.route("/editorderrecord/<int:order_id>", methods=['GET', 'POST'])
 
-def editrecordform(customer_id):
+def editorderrecord(order_id):
     form = update_order
     order = order.query.filter_by(order_id=order_id).first()
 
@@ -46,17 +46,17 @@ def editrecordform(customer_id):
 
 
 # update filter
-@app.route("/filterrecords",methods=["POST"])
-def filterrecords():
-    if request.form["cust_id"]=="all":
-        return redirect("/")
-    else:
-        data = customer.query.filter_by(dept=request.form["cust"]).all()
-        return render_template("Home.html",records=data)
+# @app.route("/filterrecords",methods=["POST"])
+# def filterrecords():
+#     if request.form["cust_id"]=="all":
+#         return redirect("/")
+#     else:
+#         data = customer.query.filter_by(dept=request.form["cust"]).all()
+#         return render_template("Home.html",records=data)
 
 
 
-@app.route("/savecustomerrecord",methods=["GET","POST"])
+@app.route("/savecustomerrecord", methods=["GET","POST"])
 def savecustomerrecord():
     form = add_customer()
     if request.method == 'POST':
@@ -85,33 +85,36 @@ def saveorderrecord():
 
         new_order = order(item=item, quantity=quantity, price=price)
         db.session.add(new_order)
+
         db.session.commit()
         return redirect("/")
         return render_template("orderinputform.html", form=form)
 
 
 
-@app.route("/personaldetails/<int:customer_id>")
-def personalinformation(customer_id):
+@app.route("/customerdetails/<int:customer_id>")
+def customerinformation(customer_id):
 	data = customer.query.filter_by(customer_id=customer_id).first()
 	return render_template("customerinfo.html", record=data)
 
 @app.route("/orderdetails/<int:order_id>")
-def personalinformation(order_id):
+def orderinformation(order_id):
 	data = order.query.filter_by(order_id=order_id).first()
 	return render_template("orderinfo.html", record=data)
 
 
 
 @app.route("/deletecustomer/<int:customer_id>")
-def deletecustomer(customer_id):
-    cust = cust.query.filter_by(customer_id=custumer_id).first()
+def deletecustomer (Models.customer(customer_id)):
+
+    cust = customer.query.filter_by(customer_id=custumer_id).first()
     db.session.delete(cust)
     db.session.commit()
     return redirect("/")
 
 @app.route("/deleteorder/<int:order_id>")
 def deleteorder(order_id):
+
     ord = order.query.filter_by(order_id=order_id).first()
     db.session.delete(ord)
     db.session.commit()
