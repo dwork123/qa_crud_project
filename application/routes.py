@@ -16,7 +16,6 @@ def home():
 def editcustomerrecord(cust_id):
     form = update_cust
     cust = customer.query.filter_by(cust_id=cust_id).first()
-
     if request.method == 'POST':
         cust.name = form.first_name.data
         cust.last_name = form.last_name.data
@@ -35,13 +34,13 @@ def editorderrecord(order_id):
     form = update_order
     order = order.query.filter_by(order_id=order_id).first()
 
-        if request.method == 'POST':
+    if request.method == 'POST':
         cust.name = form.item.data
         cust.last_name = form.quantity.data
         cust.address = form.price.data
 
     db.session.commit()
-        return redirect("/")
+    return redirect("/")
     return render_template('editorderform.html', form=form)
 
 
@@ -105,7 +104,7 @@ def orderinformation(order_id):
 
 
 @app.route("/deletecustomer/<int:customer_id>")
-def deletecustomer (Models.customer(customer_id)):
+def deletecustomer(customer_id):
 
     cust = customer.query.filter_by(customer_id=custumer_id).first()
     db.session.delete(cust)
