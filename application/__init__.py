@@ -13,3 +13,5 @@ db = SQLAlchemy(app)
 import application.models
 import application.forms
 import application.routes
+
+#jira connection test
