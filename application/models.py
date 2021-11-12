@@ -18,19 +18,3 @@ class order(db.Model):
     
     # def __repr__(self):
     #     return f"{self.quantity} {self.item} {self.price} {self.customer_id}"
-    
-# class Customer(db.Model):
-#     cust_id= db.Column(db.Integer, primary_key= True)
-#     first_name= db.Column(db.String(50))
-#     last_name= db.Column(db.String(50))
-#     address= db.Column(db.String(50))
-#     phone_no= db.Column(db.Integer)
-#     e_mail= db.Column(db.Integer)
-#     customer_orders= db.relationship('Order', backref='customer')
-
-# class Order(db.Model):
-#     order_no= db.Column(db.Integer, primary_key= True)
-#     item= db.Column(db.String(50))
-#     quantity= db.Column(db.Integer)
-#     price= db.Column(db.Integer)
-#     cust_id= db.Column(db.Integer, db.ForeignKey('customer.cust_id'))

@@ -17,8 +17,7 @@ if [ ${create} ]; then
   python3 create.py
 fi
 
-echo 'TESTING:'
-python3 -m pytest --cov=application --cov-report html
+# python3 -m pytest --cov=application --cov-report html
 python3 app.py
 # cat - > /tmp/app.service << EOF
 # [Unit]
