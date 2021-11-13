@@ -13,16 +13,14 @@ def home():
 
     
 @app.route("/editcutomerrecord/<int:cust_id>", methods=['GET', 'POST'])
-
 def editcustomerrecord(cust_id):
     form = update_cust
     cust = customer.query.filter_by(cust_id=cust_id).first()
     if request.method == 'POST':
-        cust.name = form.first_name.data
-        cust.last_name = form.last_name.data
-        cust.address = form.address.data
-        cust.phone_no = form.phone_no.data
-        cust.e_mail = form.e_mail.data
+        name = form.first_name.data
+        last_name = form.last_name.data
+        address = form.address.data
+        phone_no = form.phone_no.data
 
         db.session.commit()
         return redirect("/")
@@ -30,15 +28,14 @@ def editcustomerrecord(cust_id):
 
 
 @app.route("/editorderrecord/<int:order_id>", methods=['GET', 'POST'])
-
 def editorderrecord(order_id):
     form = update_order
     ord = order.query.filter_by(order_id=order_id).first()
 
     if request.method == 'POST':
-        ord.name = form.item.data
-        ord.last_name = form.quantity.data
-        ord.price = form.price.data
+        name = form.item.data
+        last_name = form.quantity.data
+        price = form.price.data
 
     db.session.commit()
     return redirect("/")
@@ -64,9 +61,8 @@ def savecustomerrecord():
         last_name = form.last_name.data
         address = form.address.data
         phone_no = form.phone_no.data
-        e_mail = form.email_address.data
 
-        new_customer = customer(first_name=first_name, last_name=last_name, address=address, phone_no=phone_no, email_address=e_mail)
+        new_customer = customer(first_name=first_name, last_name=last_name, address=address, phone_no=phone_no)
         db.session.add(new_customer)
         db.session.commit()
         return redirect("/")
@@ -79,15 +75,17 @@ def saveorderrecord():
     form = add_order()
     if request.method == 'POST':
 
-        order.item = form.item.data
-        order.quantity = form.quantity.data
-        order.price = form.price.data
+        item = form.item.data
+        quantity = form.quantity.data
+        price = form.price.data
+        # total= quantity*price
+        # print(total)
 
         new_order = order(item=item, quantity=quantity, price=price)
         db.session.add(new_order)
-
         db.session.commit()
         return redirect("/")
+    else:
         return render_template("orderinputform.html", form=form)
 
 
@@ -97,7 +95,7 @@ def customerinformation(customer_id):
     data = customer.query.filter_by(customer_id=customer_id).first()
     return render_template("customerinfo.html", record=data)
 
-@app.route("/orderdetails/<int:order_id>")
+@app.route("/orderdetails/<order_id>")
 def orderinformation(order_id):
 	data = order.query.filter_by(order_id=order_id).first()
 	return render_template("orderinfo.html", record=data)

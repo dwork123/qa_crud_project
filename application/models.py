@@ -6,7 +6,6 @@ class customer(db.Model):
     last_name= db.Column(db.String(50))
     address= db.Column(db.String(255))
     phone_no= db.Column(db.Integer)
-    email_address= db.Column(db.String(50))
     customer_orders= db.relationship('order', backref= 'customer')
 
 class order(db.Model):
