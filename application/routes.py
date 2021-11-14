@@ -1,6 +1,6 @@
 from flask import request, redirect, render_template, url_for
 from application import app, db
-from application.forms import add_cust, update_cust
+from application.forms import add_cust, update_cust, add_order, update_order
 from application.models import customer, order
 
 
@@ -12,10 +12,10 @@ def home():
     return render_template('home.html', records=cust)
 
     
-@app.route("/editcutomerrecord/<int:cust_id>", methods=['GET', 'POST'])
+@app.route("/editcustomerrecord", methods=['GET', 'POST'])
 def editcustomerrecord(cust_id):
     form = update_cust
-    cust = customer.query.filter_by(cust_id=cust_id).first()
+    # cust = customer.query.filter_by(cust_id=cust_id).first()
     if request.method == 'POST':
         name = form.first_name.data
         last_name = form.last_name.data
@@ -24,22 +24,23 @@ def editcustomerrecord(cust_id):
 
         db.session.commit()
         return redirect("/")
-    return render_template('editcustomerform.html', form=form)
+    else:
+        return render_template('editcustomerform.html', form=form)
 
 
-@app.route("/editorderrecord/<int:order_id>", methods=['GET', 'POST'])
+@app.route("/editorderrecord", methods=['GET', 'POST'])
 def editorderrecord(order_id):
     form = update_order
     ord = order.query.filter_by(order_id=order_id).first()
-
     if request.method == 'POST':
-        name = form.item.data
-        last_name = form.quantity.data
+        item = form.item.data
+        quantity = form.quantity.data
         price = form.price.data
 
-    db.session.commit()
-    return redirect("/")
-    return render_template('editorderform.html', form=form)
+        db.session.commit()
+        return redirect("/")
+    else:
+        return render_template('editorderform.html', form=form)
 
 
 @app.route("/filterrecords",methods=["POST"])
@@ -78,8 +79,6 @@ def saveorderrecord():
         item = form.item.data
         quantity = form.quantity.data
         price = form.price.data
-        # total= quantity*price
-        # print(total)
 
         new_order = order(item=item, quantity=quantity, price=price)
         db.session.add(new_order)
@@ -101,15 +100,16 @@ def orderinformation(order_id):
 	return render_template("orderinfo.html", record=data)
 
 
-@app.route("/deletecustomer/<int:customer_id>")
-def deletecustomer(customer_id):
+@app.route("/deletecustomerrecord/<int:customer_id>")
+def deletecustomer(cust_id):
 
-    cust = customer.query.filter_by(customer_id=custumer_id).first()
+    cust = customer.query.filter_by(cust_id=cust_id).first()
     db.session.delete(cust)
     db.session.commit()
     return redirect("/")
+    return render_template("deleteorder.html", record=data)
 
-@app.route("/deleteorder/<int:order_id>")
+@app.route("/deleteorderrecord<int:order_id>")
 def deleteorder(order_id):
 
     ord = order.query.filter_by(order_id=order_id).first()
