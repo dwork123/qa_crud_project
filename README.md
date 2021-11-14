@@ -55,7 +55,7 @@ this will be a test driven development focussing on functionality and testing th
 
 Updates
 ------------------------------------
-continuous integration on jenkind=s means the app will updated throughout and after the project, to include more elaborate ideas that time has not permitted.
+continuous integration on jenkins means the app will updated throughout and after the project, to include more elaborate ideas that time has not permitted.
 
 
 
