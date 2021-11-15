@@ -100,8 +100,8 @@ def orderinformation(order_id):
 	return render_template("orderinfo.html", record=data)
 
 
-@app.route("/deletecustomerrecord/<int:customer_id>")
-def deletecustomer(cust_id):
+@app.route("/deletecustomerrecord/", methods=['POST'])
+def deletecustomer(customer_id):
 
     cust = customer.query.filter_by(cust_id=cust_id).first()
     db.session.delete(cust)

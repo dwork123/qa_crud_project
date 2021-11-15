@@ -35,7 +35,7 @@
             {%  for record in records %}
                 <tr>
                     <td> <a href="/customerdetails/{{record.customer_id}}"> {{record.first_name }} {{record.last_name}} </a> </td>
-                    <td> <a href="/editcustomerrecord/{{record.customer_id}}"> {{record.first_name}} {{record.last_name}}{{record.address}} edit customer </a></td>
+                    <td> <a href="/editcustomerrecord/{{record.customer_id}}"> {{record.cust_id}} edit customer </a></td>
                     <td> <a href="/deletecustomerrecord/{{record.customer_id}}">{{record.customer_id}} delete customer</a></td>
                 </tr>
             {% endfor %}
